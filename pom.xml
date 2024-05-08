@@ -15,6 +15,7 @@
     <description>BookWhile</description>
     <properties>
         <java.version>21</java.version>
+        <liquibase.maven.plugin.version>4.20.0</liquibase.maven.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -70,7 +71,15 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.maven.plugin.version}</version>
+                <configuration>
+                    <propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
