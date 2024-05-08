@@ -1,0 +1,141 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: sercan
+      changes:
+        - createTable:
+            tableName: USERS
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+              - column:
+                  name: SURNAME
+                  type: VARCHAR(255)
+              - column:
+                  name: EMAIL
+                  type: VARCHAR(255)
+              - column:
+                  name: USERNAME
+                  type: VARCHAR(255)
+              - column:
+                  name: PASSWORD
+                  type: VARCHAR()
+              - column:
+                  name: PROFILE_PHOTO
+                  type: BYTEA()
+        - createTable:
+            tableName: AUTHORS
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+              - column:
+                  name: SURNAME
+                  type: VARCHAR(255)
+              - column:
+                  name: AUTHOR_PHOTO
+                  type: BYTEA()
+        - createTable:
+            tableName: BOOKS
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ISBN
+                  type: VARCHAR(17)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: BOOK_PHOTO
+                  type: BYTEA()
+              - column:
+                  name: AUTHOR_ID
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: FK_BOOK_AUTHOR
+                    references: AUTHORS(ID)
+        - createTable:
+            tableName: BOOK_REQUESTS
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: TYPE
+                  type: VARCHAR(1)
+              - column:
+                  name: CREATED_DATE
+                  type: DATE
+              - column:
+                  name: ACCEPTED_DATE
+                  type: DATE
+              - column:
+                  name: RETURNED_AT
+                  type: DATE
+              - column:
+                  name: BOOK_ID
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: FK_BOOK_REQUEST_BOOK_ID
+                    references: BOOKS(ID)
+              - column:
+                  name: REQUESTED_BOOK_ID
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: FK_BOOK_REQUEST_REQUESTED_BOOK_ID
+                    references: BOOKS(ID)
+        - createTable:
+            tableName: LIBRARY
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: RATING
+                  type: SMALLINT
+              - column:
+                  name: REVIEW
+                  type: VARCHAR(2000)
+              - column:
+                  name: STATUS
+                  type: VARCHAR(1)
+              - column:
+                  name: USER_ID
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: FK_LIBRARY_USER
+                    references: USERS(ID)
+              - column:
+                  name: BOOK_ID
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: FK_LIBRARY_BOOK
+                    references: BOOKS(ID)
