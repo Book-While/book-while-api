@@ -22,6 +22,7 @@
         <maven.checkstyle.plugin>3.3.1</maven.checkstyle.plugin>
         <puppycrawl.tool.version>10.16.0</puppycrawl.tool.version>
         <maven.compiler.plugin>3.13.0</maven.compiler.plugin>
+        <org.springdoc.version>2.5.0</org.springdoc.version>
     </properties>
     <dependencies>
         <dependency>
@@ -61,11 +62,15 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${org.springdoc.version}</version>
         </dependency>
     </dependencies>
 
