@@ -51,7 +51,6 @@ public class AuthorController {
         return ResponseEntity.ok(authorResponse);
     }
 
-    //    TODO: should we return the created author or just the status ?
     @PostMapping("/")
     public ResponseEntity<Void> createAuthor(@RequestBody AuthorRequest authorRequest) {
 
@@ -62,9 +61,8 @@ public class AuthorController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //    TODO: should we return the updated author or just the status if the body is empty we can return no content build ?
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateAuthor(@PathVariable UUID id, @RequestBody AuthorRequest authorRequest) {
+    public ResponseEntity<Void> updateAuthor(@PathVariable UUID id, @RequestBody AuthorRequest authorRequest) {
 
         AuthorRequestDto authorRequestDto = authorModelMapper.toAuthorRequestDto(authorRequest);
 
@@ -78,6 +76,6 @@ public class AuthorController {
 
         authorService.deleteAuthor(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }
