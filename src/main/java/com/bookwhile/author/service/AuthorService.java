@@ -5,6 +5,7 @@ import com.bookwhile.author.dto.AuthorResponseDto;
 import com.bookwhile.author.entity.AuthorEntity;
 import com.bookwhile.author.mapper.AuthorDtoMapper;
 import com.bookwhile.author.repository.AuthorRepository;
+import com.bookwhile.book.dto.BookDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,10 @@ public class AuthorService {
         AuthorEntity authorEntity = authorRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Author not found"));
 
-        return authorDtoMapper.toAuthorDto(authorEntity);
-    }
+        List<BookDto> bookDtoList = authorDtoMapper.toBookDtoList(authorEntity.getBooks());
 
+        return authorDtoMapper.toAuthorDto(authorEntity, bookDtoList);
+    }
 
     public void createAuthor(AuthorRequestDto authorRequestDto) {
 
@@ -51,7 +53,8 @@ public class AuthorService {
 
     public void deleteAuthor(UUID id) {
 
-    //        TODO: handle cascade deletion of books of authors !!
+        authorRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Author not found"));
 
         authorRepository.deleteById(id);
     }

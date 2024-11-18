@@ -1,15 +1,19 @@
 package com.bookwhile.author.entity;
 
 
+import com.bookwhile.book.entity.BookEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -29,13 +33,10 @@ public class AuthorEntity {
     @Column(name = "surname")
     private String surname;
 
-
-    //    TODO: consider removing this and store photos elsewhere
+    //    FIXME: consider removing this and store photos elsewhere
     @Column(name = "author_photo")
     private byte[] authorPhoto;
 
-    //    TODO: add  book relation in here ??
-    //    @OneToMany(mappedBy = "author")
-    //    private Set<Book> books = new LinkedHashSet<>();
-
+    @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.REMOVE)
+    private List<BookEntity> books;
 }
