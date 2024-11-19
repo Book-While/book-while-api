@@ -16,7 +16,7 @@
     <properties>
         <java.version>21</java.version>
         <liquibase.maven.plugin.version>4.20.0</liquibase.maven.plugin.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.6.0</org.mapstruct.version>
         <org.projectlombok.version>1.18.32</org.projectlombok.version>
         <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
         <maven.checkstyle.plugin>3.3.1</maven.checkstyle.plugin>
