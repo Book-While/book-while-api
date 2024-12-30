@@ -9,11 +9,15 @@ import com.bookwhile.book.dto.UpdateBookRequestDto;
 import com.bookwhile.book.entity.BookEntity;
 import com.bookwhile.book.mapper.BookDtoMapper;
 import com.bookwhile.book.repository.BookRepository;
+import com.bookwhile.exception.BookWhileException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
+import static com.bookwhile.constant.Constant.AUTHOR_NOT_FOUND;
+import static com.bookwhile.constant.Constant.BOOK_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
@@ -28,7 +32,7 @@ public class BookService {
     public BookResponseDto getBook(UUID id) {
 
         BookEntity bookEntity = bookRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Book not found"));
+            .orElseThrow(() -> new BookWhileException(BOOK_NOT_FOUND));
 
         AuthorDto authorDto = bookDtoMapper.toAuthorDto(bookEntity.getAuthorEntity());
 
@@ -45,7 +49,7 @@ public class BookService {
     public void createBook(CreateBookRequestDto createBookRequestDto) {
 
         AuthorEntity authorEntity = authorRepository.findById(createBookRequestDto.getAuthorId())
-            .orElseThrow(() -> new RuntimeException("Author not found"));
+            .orElseThrow(() -> new BookWhileException(AUTHOR_NOT_FOUND));
 
         BookEntity bookEntity = bookDtoMapper.toBookEntity(createBookRequestDto, authorEntity);
 
@@ -55,7 +59,7 @@ public class BookService {
     public void updateBook(UUID id, UpdateBookRequestDto updateBookRequestDto) {
 
         BookEntity bookEntity = bookRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Book not found"));
+            .orElseThrow(() -> new BookWhileException(BOOK_NOT_FOUND));
 
         bookDtoMapper.updateBookEntity(bookEntity, updateBookRequestDto);
 
@@ -65,10 +69,8 @@ public class BookService {
     public void deleteBook(UUID id) {
 
         bookRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Book not found"));
+            .orElseThrow(() -> new BookWhileException(BOOK_NOT_FOUND));
 
         bookRepository.deleteById(id);
     }
-
-
 }

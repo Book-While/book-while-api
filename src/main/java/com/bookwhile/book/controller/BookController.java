@@ -8,6 +8,7 @@ import com.bookwhile.book.model.BookResponse;
 import com.bookwhile.book.model.CreateBookRequest;
 import com.bookwhile.book.model.UpdateBookRequest;
 import com.bookwhile.book.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +55,7 @@ public class BookController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> createBook(@RequestBody CreateBookRequest createBookRequest) {
+    public ResponseEntity<Void> createBook(@RequestBody @Valid CreateBookRequest createBookRequest) {
 
         CreateBookRequestDto createBookRequestDto = bookModelMapper.toBookRequestDto(createBookRequest);
 
@@ -64,7 +65,8 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateBook(@PathVariable UUID id, @RequestBody UpdateBookRequest updateBookRequest) {
+    public ResponseEntity<Void> updateBook(
+        @PathVariable UUID id, @RequestBody @Valid UpdateBookRequest updateBookRequest) {
 
         UpdateBookRequestDto updateBookRequestDto = bookModelMapper.toUpdateBookRequestDto(updateBookRequest);
 
