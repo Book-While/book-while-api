@@ -138,7 +138,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<ApiError> handleHttpRequestMethodNotSupported(
+    public ResponseEntity<ApiError> handleHttpRequestMethodNotSupported(
         HttpRequestMethodNotSupportedException ex, HttpServletRequest request) {
 
         String errorMessage;
