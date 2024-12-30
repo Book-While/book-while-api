@@ -6,6 +6,7 @@ import com.bookwhile.author.mapper.AuthorModelMapper;
 import com.bookwhile.author.model.AuthorRequest;
 import com.bookwhile.author.model.AuthorResponse;
 import com.bookwhile.author.service.AuthorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,7 @@ public class AuthorController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> createAuthor(@RequestBody AuthorRequest authorRequest) {
+    public ResponseEntity<Void> createAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
 
         AuthorRequestDto authorRequestDto = authorModelMapper.toAuthorRequestDto(authorRequest);
 
@@ -62,7 +63,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateAuthor(@PathVariable UUID id, @RequestBody AuthorRequest authorRequest) {
+    public ResponseEntity<Void> updateAuthor(@PathVariable UUID id, @RequestBody @Valid AuthorRequest authorRequest) {
 
         AuthorRequestDto authorRequestDto = authorModelMapper.toAuthorRequestDto(authorRequest);
 

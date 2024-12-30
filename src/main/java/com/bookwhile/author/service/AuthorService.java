@@ -6,11 +6,14 @@ import com.bookwhile.author.entity.AuthorEntity;
 import com.bookwhile.author.mapper.AuthorDtoMapper;
 import com.bookwhile.author.repository.AuthorRepository;
 import com.bookwhile.book.dto.BookDto;
+import com.bookwhile.exception.BookWhileException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
+import static com.bookwhile.constant.Constant.AUTHOR_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +31,7 @@ public class AuthorService {
     public AuthorResponseDto getAuthor(UUID id) {
 
         AuthorEntity authorEntity = authorRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Author not found"));
+            .orElseThrow(() -> new BookWhileException(AUTHOR_NOT_FOUND));
 
         List<BookDto> bookDtoList = authorDtoMapper.toBookDtoList(authorEntity.getBooks());
 
@@ -44,7 +47,7 @@ public class AuthorService {
     public void updateAuthor(UUID id, AuthorRequestDto authorRequestDto) {
 
         AuthorEntity authorEntity = authorRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Author not found"));
+            .orElseThrow(() -> new BookWhileException(AUTHOR_NOT_FOUND));
 
         authorDtoMapper.updateAuthorEntity(authorEntity, authorRequestDto);
 
@@ -54,7 +57,7 @@ public class AuthorService {
     public void deleteAuthor(UUID id) {
 
         authorRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Author not found"));
+            .orElseThrow(() -> new BookWhileException(AUTHOR_NOT_FOUND));
 
         authorRepository.deleteById(id);
     }

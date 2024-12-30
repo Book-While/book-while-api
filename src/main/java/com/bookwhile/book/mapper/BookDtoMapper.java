@@ -25,7 +25,7 @@ public interface BookDtoMapper {
 
     List<BookResponseDto> toBookResponseDtoList(List<BookEntity> bookList);
 
-    BookEntity updateBookEntity(@MappingTarget BookEntity bookEntity, UpdateBookRequestDto bookRequestDto);
+    void updateBookEntity(@MappingTarget BookEntity bookEntity, UpdateBookRequestDto bookRequestDto);
 
     AuthorDto toAuthorDto(AuthorEntity authorEntity);
 }
