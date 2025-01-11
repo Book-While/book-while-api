@@ -1,10 +1,12 @@
 package com.bookwhile.exception;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@ToString
 @Getter
 public class ApiError {
 

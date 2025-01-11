@@ -1,4 +1,6 @@
 spring:
+  banner:
+    location: banner.txt
   jpa:
     show-sql: true
     hibernate:
