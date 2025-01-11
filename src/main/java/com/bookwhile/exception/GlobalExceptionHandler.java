@@ -3,6 +3,7 @@ package com.bookwhile.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -20,8 +21,11 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    public static final String API_ERROR_FORMAT = "Api Error: {}";
 
     @ExceptionHandler(BookWhileException.class)
     public ResponseEntity<ApiError> handleBookWhileException(BookWhileException ex, HttpServletRequest request) {
@@ -33,6 +37,8 @@ public class GlobalExceptionHandler {
             ex.getMessage(),
             request.getRequestURI()
         );
+
+        log.error(API_ERROR_FORMAT, apiError);
 
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
@@ -55,6 +61,8 @@ public class GlobalExceptionHandler {
             fieldErrors
         );
 
+        log.error(API_ERROR_FORMAT, apiError);
+
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
@@ -76,6 +84,8 @@ public class GlobalExceptionHandler {
             errorMessage,
             request.getRequestURI()
         );
+
+        log.error(API_ERROR_FORMAT, apiError);
 
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
@@ -100,6 +110,8 @@ public class GlobalExceptionHandler {
             violations
         );
 
+        log.error(API_ERROR_FORMAT, apiError);
+
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
@@ -117,6 +129,8 @@ public class GlobalExceptionHandler {
             request.getRequestURI()
         );
 
+        log.error(API_ERROR_FORMAT, apiError);
+
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
@@ -133,6 +147,8 @@ public class GlobalExceptionHandler {
             errorMessage,
             request.getRequestURI()
         );
+
+        log.error(API_ERROR_FORMAT, apiError);
 
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
@@ -162,6 +178,8 @@ public class GlobalExceptionHandler {
             request.getRequestURI()
         );
 
+        log.error(API_ERROR_FORMAT, apiError);
+
         return new ResponseEntity<>(apiError, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
@@ -183,6 +201,8 @@ public class GlobalExceptionHandler {
             request.getRequestURI()
         );
 
+        log.error(API_ERROR_FORMAT, apiError);
+
         return new ResponseEntity<>(apiError, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
@@ -203,6 +223,8 @@ public class GlobalExceptionHandler {
             request.getRequestURI()
         );
 
+        log.error(API_ERROR_FORMAT, apiError);
+
         return new ResponseEntity<>(apiError, HttpStatus.NOT_ACCEPTABLE);
     }
 
@@ -217,6 +239,8 @@ public class GlobalExceptionHandler {
             ex.getMessage(),
             request.getRequestURI()
         );
+
+        log.error(API_ERROR_FORMAT, apiError);
 
         return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }

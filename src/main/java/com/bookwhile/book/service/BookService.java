@@ -19,6 +19,7 @@ import java.util.UUID;
 import static com.bookwhile.constant.Constant.AUTHOR_NOT_FOUND;
 import static com.bookwhile.constant.Constant.BOOK_NOT_FOUND;
 
+
 @RequiredArgsConstructor
 @Service
 public class BookService {
@@ -68,8 +69,9 @@ public class BookService {
 
     public void deleteBook(UUID id) {
 
-        bookRepository.findById(id)
-            .orElseThrow(() -> new BookWhileException(BOOK_NOT_FOUND));
+        if (!bookRepository.existsById(id)) {
+            throw new BookWhileException(BOOK_NOT_FOUND);
+        }
 
         bookRepository.deleteById(id);
     }
