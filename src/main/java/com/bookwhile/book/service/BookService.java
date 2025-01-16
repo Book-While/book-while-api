@@ -68,11 +68,6 @@ public class BookService {
     }
 
     public void deleteBook(UUID id) {
-
-        if (!bookRepository.existsById(id)) {
-            throw new BookWhileException(BOOK_NOT_FOUND);
-        }
-
         bookRepository.deleteById(id);
     }
 }
