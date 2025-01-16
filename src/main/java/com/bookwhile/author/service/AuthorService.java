@@ -49,18 +49,12 @@ public class AuthorService {
         AuthorEntity authorEntity = authorRepository.findById(id)
             .orElseThrow(() -> new BookWhileException(AUTHOR_NOT_FOUND));
 
-
         authorDtoMapper.updateAuthorEntity(authorEntity, authorRequestDto);
 
         authorRepository.save(authorEntity);
     }
 
     public void deleteAuthor(UUID id) {
-
-        if (!authorRepository.existsById(id)) {
-            throw new BookWhileException(AUTHOR_NOT_FOUND);
-        }
-
         authorRepository.deleteById(id);
     }
 }
