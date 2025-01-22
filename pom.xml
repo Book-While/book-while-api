@@ -22,7 +22,7 @@
         <maven.checkstyle.plugin>3.3.1</maven.checkstyle.plugin>
         <puppycrawl.tool.version>10.16.0</puppycrawl.tool.version>
         <maven.compiler.plugin>3.13.0</maven.compiler.plugin>
-        <org.springdoc.version>2.5.0</org.springdoc.version>
+        <org.springdoc.version>2.7.0</org.springdoc.version>
     </properties>
     <dependencies>
         <dependency>
