@@ -16,7 +16,7 @@ public class AuthorResponse {
 
     private String name;
 
-    private String surname;
+    //    private String surname;
 
     private List<BookDto> bookDtoList;
 }

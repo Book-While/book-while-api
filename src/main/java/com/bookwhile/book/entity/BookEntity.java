@@ -28,6 +28,7 @@ public class BookEntity {
     @Column(name = "id", nullable = false)
     private UUID id;
 
+    //    TODO: fetch type lazy deneme yap
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private AuthorEntity authorEntity;

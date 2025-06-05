@@ -31,7 +31,7 @@ public class BookService {
     private final AuthorRepository authorRepository;
 
     public BookResponseDto getBook(UUID id) {
-
+        
         BookEntity bookEntity = bookRepository.findById(id)
             .orElseThrow(() -> new BookWhileException(BOOK_NOT_FOUND));
 
