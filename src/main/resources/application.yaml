@@ -1,6 +1,8 @@
 spring:
   banner:
     location: banner.txt
+  jackson:
+    default-property-inclusion: non_null
   jpa:
     show-sql: true
     hibernate:
@@ -8,12 +10,33 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: false
   datasource:
+    driver-class-name: org.postgresql.Driver
     url: ${DATASOURCE_URL}
     username: ${DATASOURCE_USERNAME}
     password: ${DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-  jackson:
-    default-property-inclusion: non_null
+  async:
+    enabled: true
+  task:
+    execution:
+      thread-name-prefix: AsyncExecutor
+      pool:
+        core-size: 100
+        max-size: 200
+        queue-capacity: 1000
+        keep-alive: 60s
+      shutdown:
+        await-termination: true
+        await-termination-period: 30s
 
 
+logging:
+  log-web-response-headers: true
+  log-web-request-headers: true
+  log-feign-request-headers: true
+  log-feign-response-headers: true
+  exclude-web-response-body-url-list:
+    - /pos-transactions
+  exclude-feign-response-body-url-list:
+    - /pos-transactions
